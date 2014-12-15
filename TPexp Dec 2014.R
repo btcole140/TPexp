@@ -567,4 +567,247 @@ write.table(TPOB, file = "TP 2013 OB.csv", sep = ",", col.names = TRUE, row.name
 write.table(TPOB1, file = "TP 2013 OB1.csv", sep = ",", col.names = TRUE, row.names = FALSE)
 write.table(TPOB2, file = "TP 2013 OB2.csv", sep = ",", col.names = TRUE, row.names = FALSE)
 
+#********************
+#Response Variables: GR
 
+#boxplot
+ggplot(data=TP, aes(x=DESTZ, y=GR))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Growth Rate (cm/day)") +
+  ggtitle("GR by DESTZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but different means... more variation in beach
+
+#boxplot
+ggplot(data=TP, aes(x=DESTS, y=GR))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Growth Rate (cm/day)") +
+  ggtitle("GR by DESTS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but different means, more variation in M
+
+#boxplot
+ggplot(data=TP, aes(x=ORZ, y=GR))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Growth Rate (cm/day)") +
+  ggtitle("GR by ORZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: the same
+
+#boxplot
+ggplot(data=TP, aes(x=ORS, y=GR))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Growth Rate (cm/day)") +
+  ggtitle("GR by ORS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but different means... more variation in D then M
+
+#distribution
+hist(TP$rankGR) #skew left... use rank
+
+#outliers
+mean(TP$GR, na.rm=TRUE)
+sd(TP$GR, na.rm=TRUE)
+0.047+(3*0.054) #=0.209, outliers = 78, 93, 69
+mean(TP[-c(69, 78, 93),]$GR, na.rm=TRUE)
+sd(TP[-c(69, 78, 93),]$GR, na.rm=TRUE)
+0.043+(3*0.045) #=0.178, outliers = 83
+
+#lm - OR
+lmgro <- lm(rankGR~ORZ*ORS, data=TP)
+lmgro2 <- update(lmgro,~.-ORZ:ORS)
+anova(lmgro2, lmgro) #2way not sig p=0.98
+lmgro3 <- update(lmgro2,~.-ORZ)
+anova(lmgro3, lmgro2) #ORZ not sig p=0.76
+lmgro4 <- update(lmgro2,~.-ORS)
+anova(lmgro4, lmgro2) #ORS not sig p=0.21
+
+par(mfrow = c(2, 2))
+plot(lmgro) #rank is best, but normQQ not normal
+par(mfrow = c(1, 1))
+
+
+#lm - DEST
+lmgrd <- lm(rankGR~DESTZ*DESTS, data=TP)
+lmgrd2 <- update(lmgrd,~.-DESTZ:DESTS)
+anova(lmgrd2, lmgrd) #2way not sig p=0.79 chisq=3.14
+lmgrd3 <- update(lmgrd2,~.-DESTZ)
+anova(lmgrd3, lmgrd2) #DESTZ not sig p=0.23 chisq=1.42
+lmgrd4 <- update(lmgrd2,~.-DESTS)
+anova(lmgrd4, lmgrd2) #DESTS is sig p=<0.0001 chisq=38.15 ***
+
+par(mfrow = c(2, 2))
+plot(lmgrd) #rank is best... normQQ not perfect, but okay
+par(mfrow = c(1, 1))
+
+
+grn <- tapply(TP$rankGR, list(TP$DESTZ, TP$DESTS), length)
+grmean <- tapply(TP$rankGR, list(TP$DESTZ, TP$DESTS), mean)
+grsd <- tapply(TP$rankGR, list(TP$DESTZ, TP$DESTS), sd)
+grCV <- (grsd/grmean)*100
+
+TPgr <- summarySE(TP, measurevar="rankGR", groupvars=c("DESTS", "DESTZ")) 
+ggplot(data=TPgr, aes(x=DESTZ, y=rankGR, group=DESTS, shape=DESTS)) +
+  geom_errorbar(aes(ymin=rankGR-se, ymax=rankGR+se), width=0.1, position=position_dodge(0.1)) +
+  geom_line(position=position_dodge(0.1)) + geom_point(size=4, position=position_dodge(0.1))+
+  xlab("Destination Zone") + ylab("Ranked Growth rate (cm/day)") +
+  ggtitle("Mean rankGR by DESTZ") +
+  annotate("text", x=c(0.85, 2.20, 0.85, 2.20), 
+           y=c(49.8, 51.98, 98.037, 79.27), 
+           label=paste("n=",grn)) +
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18)) +
+  theme(strip.text.x = element_text(size=20, face="bold")) +
+  theme(strip.text.y = element_text(size=20, face="bold")) +
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold")) +
+  scale_x_discrete(labels=c("Beach", "Dune")) +
+  scale_shape_manual(values=c(17, 1)) +
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+
+#********************
+#Response Variables: STEM.FL
+
+#boxplot
+ggplot(data=TP, aes(x=DESTZ, y=STEM.FL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Stem Length at Flowering (cm)") +
+  ggtitle("STEM.FL by DESTZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but different means... more variation in beach
+
+#boxplot
+ggplot(data=TP, aes(x=DESTS, y=STEM.FL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Stem Length at Flowering (cm)") +
+  ggtitle("STEM.FL by DESTS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but different means... more variation in M
+
+#boxplot
+ggplot(data=TP, aes(x=ORZ, y=STEM.FL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Stem Length at Flowering (cm)") +
+  ggtitle("STEM.FL by ORZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but different means
+
+#boxplot
+ggplot(data=TP, aes(x=ORS, y=STEM.FL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Stem Length at Flowering (cm)") +
+  ggtitle("STEM.FL by ORS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but different means B with D and M
+
+#distribution
+hist(TP$sqrtSTEM.FL) #not great. try sqrt, log, and rank
+
+#outliers
+mean(TP$STEM.FL, na.rm=TRUE)
+sd(TP$STEM.FL, na.rm=TRUE)
+5.15+(3*2.23) #=11.84, outliers = none
+
+#lm - OR
+lmsflo <- lm(STEM.FL~ORZ*ORS, data=TP)
+lmsflo2 <- update(lmsflo,~.-ORZ:ORS)
+anova(lmsflo2, lmsflo) #2way not sig p=0.87
+lmsflo3 <- update(lmsflo2,~.-ORZ)
+anova(lmsflo3, lmsflo2) #ORZ is sig p=0.02001 *
+lmsflo4 <- update(lmsflo2,~.-ORS)
+anova(lmsflo4, lmsflo2) #ORS not sig p=0.14
+
+par(mfrow = c(2, 2))
+plot(lmgro) #rank is best, but normQQ not normal
+par(mfrow = c(1, 1))
+
+
+#lm - DEST
+lmgrd <- lm(rankGR~DESTZ*DESTS, data=TP)
+lmgrd2 <- update(lmgrd,~.-DESTZ:DESTS)
+anova(lmgrd2, lmgrd) #2way not sig p=0.79 chisq=3.14
+lmgrd3 <- update(lmgrd2,~.-DESTZ)
+anova(lmgrd3, lmgrd2) #DESTZ not sig p=0.23 chisq=1.42
+lmgrd4 <- update(lmgrd2,~.-DESTS)
+anova(lmgrd4, lmgrd2) #DESTS is sig p=<0.0001 chisq=38.15 ***
+
+par(mfrow = c(2, 2))
+plot(lmgrd) #rank is best... normQQ not perfect, but okay
+par(mfrow = c(1, 1))
+
+
+grn <- tapply(TP$rankGR, list(TP$DESTZ, TP$DESTS), length)
+grmean <- tapply(TP$rankGR, list(TP$DESTZ, TP$DESTS), mean)
+grsd <- tapply(TP$rankGR, list(TP$DESTZ, TP$DESTS), sd)
+grCV <- (grsd/grmean)*100
+
+TPgr <- summarySE(TP, measurevar="rankGR", groupvars=c("DESTS", "DESTZ")) 
+ggplot(data=TPgr, aes(x=DESTZ, y=rankGR, group=DESTS, shape=DESTS)) +
+  geom_errorbar(aes(ymin=rankGR-se, ymax=rankGR+se), width=0.1, position=position_dodge(0.1)) +
+  geom_line(position=position_dodge(0.1)) + geom_point(size=4, position=position_dodge(0.1))+
+  xlab("Destination Zone") + ylab("Ranked Growth rate (cm/day)") +
+  ggtitle("Mean rankGR by DESTZ") +
+  annotate("text", x=c(0.85, 2.20, 0.85, 2.20), 
+           y=c(49.8, 51.98, 98.037, 79.27), 
+           label=paste("n=",grn)) +
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18)) +
+  theme(strip.text.x = element_text(size=20, face="bold")) +
+  theme(strip.text.y = element_text(size=20, face="bold")) +
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold")) +
+  scale_x_discrete(labels=c("Beach", "Dune")) +
+  scale_shape_manual(values=c(17, 1)) +
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
