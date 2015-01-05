@@ -771,7 +771,7 @@ ggplot(data=TPgr, aes(x=DESTZ, y=GR)) +
   theme(axis.title.y = element_text(vjust=1, face="bold", size=25),
         axis.text.y  = element_text(size=20, face="bold"))
 
-###TP Dune
+###TP DESTZ Dune
 #distribution
 hist(TPD2x$sqrtGR) #sqrt skew left... rank may be best
 #outliers
@@ -799,7 +799,7 @@ summary(lm2gr10)
 
 lm2grR  <- resid(lm2gr10)
 par(mfrow = c(2, 2))
-plot(lm2gr10) #okay
+plot(lm2gr10) #okay...has long tail at right
 par(mfrow = c(1, 1))
 hist(lm2grR) #okay, skew left
 
@@ -982,7 +982,7 @@ lm2slf4  <- update(lm2slf2,~.-DESTS:(ORS/ORZ))
 anova(lm2slf4, lm2slf2) #DS:(OS/OZ) marginally not sig p=0.053 f=2.94 .
 lm2slf5  <- lm(STEM.FL~DESTS+(ORS/ORZ)+ORS, data=TPD2x, na.action="na.omit")
 lm2slf6  <- update(lm2slf5,~.-DESTS)
-anova(lm2slf6, lm2slf5) #DS is sig p=0.27 f=1.26
+anova(lm2slf6, lm2slf5) #DS not sig p=0.27 f=1.26
 lm2slf7  <- update(lm2slf5,~.-(ORS/ORZ))
 anova(lm2slf7, lm2slf5) #OS/OZ not sig p=0.53 f=0.76
 lm2slf8  <- lm(STEM.FL~DESTS+ORS, data=TPD2x, na.action="na.omit")
@@ -994,7 +994,7 @@ summary(lm2slf10)
 
 lm2slfR  <- resid(lm2slf10)
 par(mfrow = c(2, 2))
-plot(lm2slf10) #okay
+plot(lm2slf10) #okay... stepwise pattern in normQQ plot
 par(mfrow = c(1, 1))
 hist(lm2slfR) #okay, tall column at left
 
@@ -1005,7 +1005,6 @@ slf2sd <- tapply(TPD2x[!is.na(TPD2x$STEM.FL),]$STEM.FL, TPD2x[!is.na(TPD2x$STEM.
 slf2CV <- (slf2sd/slf2mean)*100
 
 TP2slf <- summarySE(TPD2x, measurevar="STEM.FL", groupvars=c("DESTS")) 
-
 
 
 #********************
@@ -1103,7 +1102,7 @@ lmsf4  <- update(lmsf2,~.-DESTZ:(ORS/ORZ))
 anova(lmsf4, lmsf2) #DZ:(OS/OZ) not sig p=0.94 f=0.058
 lmsf5  <- lm(STEM.F~DESTZ+(ORS/ORZ)+ORS, data=TPDM)
 lmsf6  <- update(lmsf5,~.-DESTZ)
-anova(lmsf6, lmsf5) #DZ is sig p=0.15 f=2.18
+anova(lmsf6, lmsf5) #DZ not sig p=0.15 f=2.18
 lmsf7  <- update(lmsf5,~.-(ORS/ORZ))
 anova(lmsf7, lmsf5) #OS/OZ not sig p=0.35 f=1.16
 lmsf8  <- lm(STEM.F~DESTZ+ORS, data=TPDM)
@@ -1123,7 +1122,9 @@ sfmean <- tapply(TPDM[!is.na(TPDM$sqrtSTEM.F),]$sqrtSTEM.F, TPDM[!is.na(TPDM$sqr
 sfsd <- tapply(TPDM[!is.na(TPDM$sqrtSTEM.F),]$sqrtSTEM.F, TPDM[!is.na(TPDM$sqrtSTEM.F),]$DESTZ, sd)
 sfCV <- (sfsd/sfmean)*100
 
-###TP Dune
+TPsf <- summarySE(TPDM[!is.na(TPDM$sqrtSTEM.F),], measurevar="sqrtSTEM.F", groupvars=c("DESTZ")) 
+
+###TP DESTZ Dune
 #distribution
 hist(TPD2x[!is.na(TPDM$STEM.F),]$rankSTEM.F) #rank might be best
 #outliers
@@ -1139,7 +1140,7 @@ lm2sf4  <- update(lm2sf2,~.-DESTS:(ORS/ORZ))
 anova(lm2sf4, lm2sf2) #DS:(OS/OZ) not sig p=1 f=0.4
 lm2sf5  <- lm(rankSTEM.F~DESTS+(ORS/ORZ)+ORS, data=TPD2x, na.action="na.omit")
 lm2sf6  <- update(lm2sf5,~.-DESTS)
-anova(lm2sf6, lm2sf5) #DS is sig p=0.53 f=0.402
+anova(lm2sf6, lm2sf5) #DS not sig p=0.53 f=0.402
 lm2sf7  <- update(lm2sf5,~.-(ORS/ORZ))
 anova(lm2sf7, lm2sf5) #OS/OZ not sig p=0.64 f=0.57
 lm2sf8  <- lm(rankSTEM.F~DESTS+ORS, data=TPD2x, na.action="na.omit")
@@ -1156,10 +1157,185 @@ par(mfrow = c(1, 1))
 hist(lm2sfR) #none are great
 
 
-sf2n <- tapply(TPD2x[!is.na(TPD2x$STEM.FL),]$STEM.FL, TPD2x[!is.na(TPD2x$STEM.FL),]$DESTS, length)
-sf2mean <- tapply(TPD2x[!is.na(TPD2x$STEM.FL),]$STEM.FL, TPD2x[!is.na(TPD2x$STEM.FL),]$DESTS, mean)
-sf2sd <- tapply(TPD2x[!is.na(TPD2x$STEM.FL),]$STEM.FL, TPD2x[!is.na(TPD2x$STEM.FL),]$DESTS, sd)
+sf2n <- tapply(TPD2x[!is.na(TPD2x$rankSTEM.F),]$rankSTEM.F, TPD2x[!is.na(TPD2x$rankSTEM.F),]$DESTS, length)
+sf2mean <- tapply(TPD2x[!is.na(TPD2x$rankSTEM.F),]$rankSTEM.F, TPD2x[!is.na(TPD2x$rankSTEM.F),]$DESTS, mean)
+sf2sd <- tapply(TPD2x[!is.na(TPD2x$rankSTEM.F),]$rankSTEM.F, TPD2x[!is.na(TPD2x$rankSTEM.F),]$DESTS, sd)
 sf2CV <- (sf2sd/sf2mean)*100
 
-TP2sf <- summarySE(TPD2x, measurevar="STEM.F", groupvars=c("DESTS")) 
+TP2sf <- summarySE(TPD2x, measurevar="rankSTEM.F", groupvars=c("DESTS")) 
 
+
+#********************
+#Response Variables: BR.F
+
+#boxplot
+ggplot(data=TP, aes(x=DESTZ, y=BR.F))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Total Branches") +
+  ggtitle("BR.F by DESTZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: no overlap, and different means... Beach has more variation
+
+#boxplot
+ggplot(data=TP, aes(x=DESTS, y=BR.F))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Total Branches") +
+  ggtitle("BR.F by DESTS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: not much overlap, and different means... more variation in M
+
+#boxplot
+ggplot(data=TP, aes(x=ORZ, y=BR.F))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Total Branches") +
+  ggtitle("BR.F by ORZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: not much overlap, but same means... more variation in beach
+
+#boxplot
+ggplot(data=TP, aes(x=ORS, y=BR.F))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Total Branches") +
+  ggtitle("BR.F by ORS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, and same means B with D and M... more variation in D and M
+
+#TP DESTS MNS
+#distribution
+hist(TPDM[!is.na(TPDM$BR.F),]$sqrtBR.F) #none great... try rank
+#outliers
+mean(TPDM$BR.F, na.rm=TRUE)
+sd(TPDM$BR.F, na.rm=TRUE)
+2.22+(3*1.31) #=6.15, outliers = none
+
+#lmer vs lm
+lmebf <- lmer(rankBR.F~DESTZ*ORZ+(1+ORZ|ORS), data=TPDM, na.action="na.omit")
+lmebfa <- lmer(rankBR.F~DESTZ*ORZ+(1|ORS), data=TPDM, na.action="na.omit")
+anova(lmebf, lmebfa) #ORZ not sig p=1 chisq=0 AIC=180.94, AICa=176.94
+lmbf <- lm(rankBR.F~DESTZ*ORZ, data=TPDM, na.action="na.omit")
+x <- -2*logLik(lmbf, REML=T) +2*logLik(lmebfa, REML=T)
+x
+pchisq(x, df=5, lower.tail=F)
+#logLik= 0, p=1, random ORS not sig
+
+#check assumptions of best model
+lmbfR <- resid(lmbf) 
+lmbfF <- fitted(lmbf)
+plot(lmbfF, lmbfR) #rank okay
+abline(h=0, col=c("red"))
+hist(lmbfR) #rank okay
+qqnorm(lmbfR, main="Q-Q plot for residuals") 
+qqline(lmbfR) #none are great... stepwise pattern and long tail at right
+
+#NOTE: Since random effects are not sig, use the linear model below
+#lm - subset by DESTS=MNS
+lmbf2  <- lm(rankBR.F~DESTZ*(ORS/ORZ)+DESTZ*ORS, data=TPDM, na.action="na.omit")
+lmbf3  <- update(lmbf2,~.-DESTZ:ORS)
+anova(lmbf3, lmbf2) #DZ:OS not sig p=1, F=0
+lmbf4  <- update(lmbf2,~.-DESTZ:(ORS/ORZ))
+anova(lmbf4, lmbf2) #DZ:(OS/OZ) not sig p=1.0 f=0.0045
+lmbf5  <- lm(rankBR.F~DESTZ+(ORS/ORZ)+ORS, data=TPDM, na.action="na.omit")
+lmbf6  <- update(lmbf5,~.-DESTZ)
+anova(lmbf6, lmbf5) #DZ is sig p=0.00031 f=18.30 **
+lmbf7  <- update(lmbf5,~.-(ORS/ORZ))
+anova(lmbf7, lmbf5) #OS/OZ not sig p=0.58 f=0.66
+lmbf8  <- lm(rankBR.F~DESTZ+ORS, data=TPDM, na.action="na.omit")
+lmbf9  <- update(lmbf8,~.-ORS)
+anova(lmbf9, lmbf8) #OS not sig p=0.58 f=0.31
+lmbf10  <- lm(rankBR.F~DESTZ, data=TPDM, na.action="na.omit")
+summary(lmbf10) #intercept=18.63, DESTZ= -10.42, R^2=0.46, F=23.42[1,25], p<0.0001
+
+lmbfR  <- resid(lmbf10)
+par(mfrow = c(2, 2))
+plot(lmbf10) #rank best, but not a great normQQ plot
+par(mfrow = c(1, 1))
+hist(lmbfR) #rank okay
+
+bfn <- tapply(TPDM[!is.na(TPDM$BR.F),]$rankBR.F, TPDM[!is.na(TPDM$BR.F),]$DESTZ, length)
+bfmean <- tapply(TPDM[!is.na(TPDM$BR.F),]$rankBR.F, TPDM[!is.na(TPDM$BR.F),]$DESTZ, mean)
+bfsd <- tapply(TPDM[!is.na(TPDM$BR.F),]$rankBR.F, TPDM[!is.na(TPDM$BR.F),]$DESTZ, sd)
+bfCV <- (bfsd/bfmean)*100
+
+TPbf <- summarySE(TPDM[!is.na(TPDM$BR.F),], measurevar="rankBR.F", groupvars=c("DESTZ"))
+ggplot(data=TPbf, aes(x=DESTZ, y=rankBR.F)) +
+  geom_errorbar(aes(ymin=rankBR.F-se, ymax=rankBR.F+se), width=0.1, position=position_dodge(0.1)) +
+  geom_line(position=position_dodge(0.1)) + geom_point(size=4, position=position_dodge(0.1))+
+  xlab("Transplant Zone") + ylab("Ranked Total Branches") +
+  ggtitle("Mean rankBR.F by DESTZ TPDM") +
+  annotate("text", x=c(0.85, 2.20), 
+           y=c(18.63, 8.208), 
+           label=paste("n =",bfn), size=6, fontface="bold") +
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18)) +
+  theme(strip.text.x = element_text(size=20, face="bold")) +
+  theme(strip.text.y = element_text(size=20, face="bold")) +
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=25), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=20, face="bold")) +
+  scale_x_discrete(labels=c("Beach", "Dune")) +
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=25),
+        axis.text.y  = element_text(size=20, face="bold"))
+
+
+###TP DESTZ Dune
+#distribution
+hist(TPD2x[!is.na(TPD2x$BR.F),]$logBR.F) #rank might be best
+#outliers
+mean(TPD2x$BR.F, na.rm=TRUE)
+sd(TPD2x$BR.F, na.rm=TRUE)
+1.17+(3*0.602) #=2.98, outliers = 38
+
+#lm- subset by DESTZ=Dune
+lm2bf2  <- lm(BR.F~DESTS*(ORS/ORZ)+DESTS*ORS, data=TPD2x, na.action="na.omit")
+lm2bf3  <- update(lm2bf2,~.-DESTS:ORS)
+anova(lm2bf3, lm2bf2) #DS:OS not sig p=1, F=0
+lm2bf4  <- update(lm2bf2,~.-DESTS:(ORS/ORZ))
+anova(lm2bf4, lm2bf2) #DS:(OS/OZ) not sig p=0.67 f=0.52
+lm2bf5  <- lm(BR.F~DESTS+(ORS/ORZ)+ORS, data=TPD2x, na.action="na.omit")
+lm2bf6  <- update(lm2bf5,~.-DESTS)
+anova(lm2bf6, lm2bf5) #DS not sig p=0.31 f=1.072
+lm2bf7  <- update(lm2bf5,~.-(ORS/ORZ))
+anova(lm2bf7, lm2bf5) #OS/OZ not sig p=0.86 f=0.25
+lm2bf8  <- lm(BR.F~DESTS+ORS, data=TPD2x, na.action="na.omit")
+lm2bf9  <- update(lm2bf8,~.-ORS)
+anova(lm2bf9, lm2bf8) #OS not sig p=0.88 f=0.025
+lm2bf10  <- lm(rankBR.F~1, data=TPD2x, na.action="na.omit")
+summary(lm2bf10) #intercept=1.17
+
+lm2bfR  <- resid(lm2bf10)
+par(mfrow = c(2, 2))
+plot(lm2bf10) #none are great
+par(mfrow = c(1, 1))
+hist(lm2bfR) #none are great
+
+
+bf2n <- tapply(TPD2x[!is.na(TPD2x$BR.F),]$BR.F, TPD2x[!is.na(TPD2x$BR.F),]$DESTS, length)
+bf2mean <- tapply(TPD2x[!is.na(TPD2x$BR.F),]$BR.F, TPD2x[!is.na(TPD2x$BR.F),]$DESTS, mean)
+bf2sd <- tapply(TPD2x[!is.na(TPD2x$BR.F),]$BR.F, TPD2x[!is.na(TPD2x$BR.F),]$DESTS, sd)
+bf2CV <- (bf2sd/bf2mean)*100
+
+TP2bf <- summarySE(TPD2x, measurevar="BR.F", groupvars=c("DESTS")) 
