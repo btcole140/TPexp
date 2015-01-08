@@ -616,6 +616,87 @@ TPOB2$sqrtDiff.Date.FL.F  <- sqrt(TPOB2$Diff.Date.FL.F+0.5)
 TPOB2$rankDiff.Date.FL.F  <- rank(TPOB2$Diff.Date.FL.F, na.last="keep")
 
 
+##F.NFL
+#ALL
+TP$logF.NFL  <- log10(TP$F.NFL+1)
+TP$sqrtF.NFL  <- sqrt(TP$F.NFL+0.5)
+TP$rankF.NFL  <- rank(TP$F.NFL, na.last="keep")
+
+#DD
+TPDD$logF.NFL  <- log10(TPDD$F.NFL+1)
+TPDD$sqrtF.NFL  <- sqrt(TPDD$F.NFL+0.5)
+TPDD$rankF.NFL  <- rank(TPDD$F.NFL, na.last="keep")
+#DD1
+TPDD1$logF.NFL  <- log10(TPDD1$F.NFL+1)
+TPDD1$sqrtF.NFL  <- sqrt(TPDD1$F.NFL+0.5)
+TPDD1$rankF.NFL  <- rank(TPDD1$F.NFL, na.last="keep")
+#DD2
+TPDD2$logF.NFL  <- log10(TPDD2$F.NFL+1)
+TPDD2$sqrtF.NFL  <- sqrt(TPDD2$F.NFL+0.5)
+TPDD2$rankF.NFL  <- rank(TPDD2$F.NFL, na.last="keep")
+
+#DM
+TPDM$logF.NFL  <- log10(TPDM$F.NFL+1)
+TPDM$sqrtF.NFL  <- sqrt(TPDM$F.NFL+0.5)
+TPDM$rankF.NFL  <- rank(TPDM$F.NFL, na.last="keep")
+#DM1
+TPDM1$logF.NFL  <- log10(TPDM1$F.NFL+1)
+TPDM1$sqrtF.NFL  <- sqrt(TPDM1$F.NFL+0.5)
+TPDM1$rankF.NFL  <- rank(TPDM1$F.NFL, na.last="keep")
+#DM2
+TPDM2$logF.NFL  <- log10(TPDM2$F.NFL+1)
+TPDM2$sqrtF.NFL  <- sqrt(TPDM2$F.NFL+0.5)
+TPDM2$rankF.NFL  <- rank(TPDM2$F.NFL, na.last="keep")
+
+#D1
+TPD1$logF.NFL  <- log10(TPD1$F.NFL+1)
+TPD1$sqrtF.NFL  <- sqrt(TPD1$F.NFL+0.5)
+TPD1$rankF.NFL  <- rank(TPD1$F.NFL, na.last="keep")
+#D2
+TPD2x$logF.NFL  <- log10(TPD2x$F.NFL+1)
+TPD2x$sqrtF.NFL  <- sqrt(TPD2x$F.NFL+0.5)
+TPD2x$rankF.NFL  <- rank(TPD2x$F.NFL, na.last="keep")
+
+#OD
+TPOD$logF.NFL  <- log10(TPOD$F.NFL+1)
+TPOD$sqrtF.NFL  <- sqrt(TPOD$F.NFL+0.5)
+TPOD$rankF.NFL  <- rank(TPOD$F.NFL, na.last="keep")
+#OD1
+TPOD1$logF.NFL  <- log10(TPOD1$F.NFL+1)
+TPOD1$sqrtF.NFL  <- sqrt(TPOD1$F.NFL+0.5)
+TPOD1$rankF.NFL  <- rank(TPOD1$F.NFL, na.last="keep")
+#OD2
+TPOD2$logF.NFL  <- log10(TPOD2$F.NFL+1)
+TPOD2$sqrtF.NFL  <- sqrt(TPOD2$F.NFL+0.5)
+TPOD2$rankF.NFL  <- rank(TPOD2$F.NFL, na.last="keep")
+
+#OM
+TPOM$logF.NFL  <- log10(TPOM$F.NFL+1)
+TPOM$sqrtF.NFL  <- sqrt(TPOM$F.NFL+0.5)
+TPOM$rankF.NFL  <- rank(TPOM$F.NFL, na.last="keep")
+#OM1
+TPOM1$logF.NFL  <- log10(TPOM1$F.NFL+1)
+TPOM1$sqrtF.NFL  <- sqrt(TPOM1$F.NFL+0.5)
+TPOM1$rankF.NFL  <- rank(TPOM1$F.NFL, na.last="keep")
+#OM2
+TPOM2$logF.NFL  <- log10(TPOM2$F.NFL+1)
+TPOM2$sqrtF.NFL  <- sqrt(TPOM2$F.NFL+0.5)
+TPOM2$rankF.NFL  <- rank(TPOM2$F.NFL, na.last="keep")
+
+#OB
+TPOB$logF.NFL  <- log10(TPOB$F.NFL+1)
+TPOB$sqrtF.NFL  <- sqrt(TPOB$F.NFL+0.5)
+TPOB$rankF.NFL  <- rank(TPOB$F.NFL, na.last="keep")
+#OB1
+TPOB1$logF.NFL  <- log10(TPOB1$F.NFL+1)
+TPOB1$sqrtF.NFL  <- sqrt(TPOB1$F.NFL+0.5)
+TPOB1$rankF.NFL  <- rank(TPOB1$F.NFL, na.last="keep")
+#OB2
+TPOB2$logF.NFL  <- log10(TPOB2$F.NFL+1)
+TPOB2$sqrtF.NFL  <- sqrt(TPOB2$F.NFL+0.5)
+TPOB2$rankF.NFL  <- rank(TPOB2$F.NFL, na.last="keep")
+
+
 write.table(TPDD, file = "TP 2013 DD.csv", sep = ",", col.names = TRUE, row.names = FALSE)
 write.table(TPDD1, file = "TP 2013 DD1.csv", sep = ",", col.names = TRUE, row.names = FALSE)
 write.table(TPDD2, file = "TP 2013 DD2.csv", sep = ",", col.names = TRUE, row.names = FALSE)
@@ -724,15 +805,13 @@ qqline(lmgrR) #raw okay
 
 #NOTE: Since random effects are not sig, use the linear model below
 #lm - subset by DESTS=MNS
-lmgr2  <- lm(GR~DESTZ*(ORS/ORZ)+DESTZ*ORS, data=TPDM)
-lmgr3  <- update(lmgr2,~.-DESTZ:ORS)
-anova(lmgr3, lmgr2) #DZ:OS not sig p=1, F=0
-lmgr4  <- update(lmgr2,~.-DESTZ:(ORS/ORZ))
+lmgr2  <- lm(GR~DESTZ+ORS+ORS/ORZ+ORS/ORZ:DESTZ, data=TPDM, na.action="na.omit")
+lmgr4  <- update(lmgr2,~.-ORS/ORZ:DESTZ)
 anova(lmgr4, lmgr2) #DZ:(OS/OZ) not sig p=0.77 f=0.37
-lmgr5  <- lm(GR~DESTZ+(ORS/ORZ)+ORS, data=TPDM)
+lmgr5  <- lm(GR~DESTZ+ORS+ORS/ORZ, data=TPDM)
 lmgr6  <- update(lmgr5,~.-DESTZ)
 anova(lmgr6, lmgr5) #DZ is sig p=0.042 f=4.35 *
-lmgr7  <- update(lmgr5,~.-(ORS/ORZ))
+lmgr7  <- update(lmgr5,~.-ORS/ORZ)
 anova(lmgr7, lmgr5) #OS/OZ not sig p=0.802 f=0.33
 lmgr8  <- lm(GR~DESTZ+ORS, data=TPDM)
 lmgr9  <- update(lmgr8,~.-ORS)
@@ -780,15 +859,13 @@ sd(TPD2x$GR, na.rm=TRUE)
 0.0405+(3*0.049) #=0.19, outliers = 38
 
 #lm- subset by DESTZ=Dune
-lm2gr2  <- lm(GR~DESTS*(ORS/ORZ)+DESTS*ORS, data=TPD2x)
-lm2gr3  <- update(lm2gr2,~.-DESTS:ORS)
-anova(lm2gr3, lm2gr2) #DS:OS not sig p=1, F=0
-lm2gr4  <- update(lm2gr2,~.-DESTS:(ORS/ORZ))
+lm2gr2  <- lm(GR~DESTS+ORS+ORS/ORZ+ORS/ORZ:DESTS, data=TPD2x)
+lm2gr4  <- update(lm2gr2,~.-ORS/ORZ:DESTS)
 anova(lm2gr4, lm2gr2) #DS:(OS/OZ) not sig p=0.78 f=0.36
-lm2gr5  <- lm(GR~DESTS+(ORS/ORZ)+ORS, data=TPD2x)
+lm2gr5  <- lm(GR~DESTS+ORS+ORS/ORZ, data=TPD2x)
 lm2gr6  <- update(lm2gr5,~.-DESTS)
 anova(lm2gr6, lm2gr5) #DS is sig p=0.0055 f=8.34 **
-lm2gr7  <- update(lm2gr5,~.-(ORS/ORZ))
+lm2gr7  <- update(lm2gr5,~.-ORS/ORZ)
 anova(lm2gr7, lm2gr5) #OS/OZ not sig p=0.82 f=0.303
 lm2gr8  <- lm(GR~DESTS+ORS, data=TPD2x)
 lm2gr9  <- update(lm2gr8,~.-ORS)
@@ -919,15 +996,13 @@ qqline(lmslfR) #raw okay
 
 #NOTE: Since random effects are not sig, use the linear model below
 #lm - subset by DESTS=MNS
-lmslf2  <- lm(rankSTEM.FL~DESTZ*(ORS/ORZ)+DESTZ*ORS, data=TPDM)
-lmslf3  <- update(lmslf2,~.-DESTZ:ORS)
-anova(lmslf3, lmslf2) #DZ:OS not sig p=1, F=0
-lmslf4  <- update(lmslf2,~.-DESTZ:(ORS/ORZ))
+lmslf2  <- lm(rankSTEM.FL~DESTZ+ORS+ORS/ORZ+ORS/ORZ:DESTZ, data=TPDM)
+lmslf4  <- update(lmslf2,~.-ORS/ORZ:DESTZ)
 anova(lmslf4, lmslf2) #DZ:(OS/OZ) not sig p=0.38 f=1.0005
-lmslf5  <- lm(rankSTEM.FL~DESTZ+(ORS/ORZ)+ORS, data=TPDM)
+lmslf5  <- lm(rankSTEM.FL~DESTZ+ORS+ORS/ORZ, data=TPDM)
 lmslf6  <- update(lmslf5,~.-DESTZ)
 anova(lmslf6, lmslf5) #DZ is sig p=0.023 f=5.82 *
-lmslf7  <- update(lmslf5,~.-(ORS/ORZ))
+lmslf7  <- update(lmslf5,~.-ORS/ORZ)
 anova(lmslf7, lmslf5) #OS/OZ not sig p=0.69 f=0.49
 lmslf8  <- lm(rankSTEM.FL~DESTZ+ORS, data=TPDM)
 lmslf9  <- update(lmslf8,~.-ORS)
@@ -947,6 +1022,7 @@ slfsd <- tapply(TPDM[!is.na(TPDM$rankSTEM.FL),]$rankSTEM.FL, TPDM[!is.na(TPDM$ra
 slfCV <- (slfsd/slfmean)*100
 
 TPslf <- summarySE(TPDM, measurevar="rankSTEM.FL", groupvars=c("DESTZ")) 
+TPslf2 <- summarySE(TPDM, measurevar="STEM.FL", groupvars=c("DESTZ")) 
 ggplot(data=TPslf, aes(x=DESTZ, y=rankSTEM.FL)) +
   geom_errorbar(aes(ymin=rankSTEM.FL-se, ymax=rankSTEM.FL+se), width=0.1, position=position_dodge(0.1)) +
   geom_line(position=position_dodge(0.1)) + geom_point(size=4, position=position_dodge(0.1))+
@@ -975,15 +1051,13 @@ sd(TPD2x$STEM.FL, na.rm=TRUE)
 4.66+(3*1.46) #=9.04, outliers = none
 
 #lm- subset by DESTZ=Dune
-lm2slf2  <- lm(STEM.FL~DESTS*(ORS/ORZ)+DESTS*ORS, data=TPD2x, na.action="na.omit")
-lm2slf3  <- update(lm2slf2,~.-DESTS:ORS)
-anova(lm2slf3, lm2slf2) #DS:OS not sig p=1, F=0
-lm2slf4  <- update(lm2slf2,~.-DESTS:(ORS/ORZ))
+lm2slf2  <- lm(STEM.FL~DESTS+ORS+ORS/ORZ+ORS/ORZ:DESTS, data=TPD2x, na.action="na.omit")
+lm2slf4  <- update(lm2slf2,~.-ORS/ORZ:DESTS)
 anova(lm2slf4, lm2slf2) #DS:(OS/OZ) marginally not sig p=0.053 f=2.94 .
-lm2slf5  <- lm(STEM.FL~DESTS+(ORS/ORZ)+ORS, data=TPD2x, na.action="na.omit")
+lm2slf5  <- lm(STEM.FL~DESTS+ORS+ORS/ORZ, data=TPD2x, na.action="na.omit")
 lm2slf6  <- update(lm2slf5,~.-DESTS)
 anova(lm2slf6, lm2slf5) #DS not sig p=0.27 f=1.26
-lm2slf7  <- update(lm2slf5,~.-(ORS/ORZ))
+lm2slf7  <- update(lm2slf5,~.-ORS/ORZ)
 anova(lm2slf7, lm2slf5) #OS/OZ not sig p=0.53 f=0.76
 lm2slf8  <- lm(STEM.FL~DESTS+ORS, data=TPD2x, na.action="na.omit")
 lm2slf9  <- update(lm2slf8,~.-ORS)
@@ -1095,21 +1169,19 @@ qqline(lmsfR) #sqrt okay
 
 #NOTE: Since random effects are not sig, use the linear model below
 #lm - subset by DESTS=MNS
-lmsf2  <- lm(STEM.F~DESTZ*(ORS/ORZ)+DESTZ*ORS, data=TPDM)
-lmsf3  <- update(lmsf2,~.-DESTZ:ORS)
-anova(lmsf3, lmsf2) #DZ:OS not sig p=1, F=0
-lmsf4  <- update(lmsf2,~.-DESTZ:(ORS/ORZ))
-anova(lmsf4, lmsf2) #DZ:(OS/OZ) not sig p=0.94 f=0.058
-lmsf5  <- lm(STEM.F~DESTZ+(ORS/ORZ)+ORS, data=TPDM)
+lmsf2  <- lm(sqrtSTEM.F~DESTZ+ORS+ORS/ORZ+ORS/ORZ:DESTZ, data=TPDM)
+lmsf4  <- update(lmsf2,~.-ORS/ORZ:DESTZ)
+anova(lmsf4, lmsf2) #DZ:(OS/OZ) not sig p=0.99 f=0.0059
+lmsf5  <- lm(sqrtSTEM.F~DESTZ+ORS+ORS/ORZ, data=TPDM)
 lmsf6  <- update(lmsf5,~.-DESTZ)
-anova(lmsf6, lmsf5) #DZ not sig p=0.15 f=2.18
-lmsf7  <- update(lmsf5,~.-(ORS/ORZ))
-anova(lmsf7, lmsf5) #OS/OZ not sig p=0.35 f=1.16
-lmsf8  <- lm(STEM.F~DESTZ+ORS, data=TPDM)
+anova(lmsf6, lmsf5) #DZ not sig p=0.073 f=3.57 .
+lmsf7  <- update(lmsf5,~.-ORS/ORZ)
+anova(lmsf7, lmsf5) #OS/OZ not sig p=0.28 f=1.37
+lmsf8  <- lm(sqrtSTEM.F~DESTZ+ORS, data=TPDM)
 lmsf9  <- update(lmsf8,~.-ORS)
 anova(lmsf9, lmsf8) #OS not sig p=0.87 f=0.026
 lmsf10  <- lm(sqrtSTEM.F~1, data=TPDM)
-summary(lmsf10) #intercept=8.17
+summary(lmsf10) #intercept=2.86
 
 lmsfR  <- resid(lmsf10)
 par(mfrow = c(2, 2))
@@ -1122,7 +1194,8 @@ sfmean <- tapply(TPDM[!is.na(TPDM$sqrtSTEM.F),]$sqrtSTEM.F, TPDM[!is.na(TPDM$sqr
 sfsd <- tapply(TPDM[!is.na(TPDM$sqrtSTEM.F),]$sqrtSTEM.F, TPDM[!is.na(TPDM$sqrtSTEM.F),]$DESTZ, sd)
 sfCV <- (sfsd/sfmean)*100
 
-TPsf <- summarySE(TPDM[!is.na(TPDM$sqrtSTEM.F),], measurevar="sqrtSTEM.F", groupvars=c("DESTZ")) 
+TPsf <- summarySE(TPDM[!is.na(TPDM$STEM.F),], measurevar="sqrtSTEM.F", groupvars=c("DESTZ")) 
+TPsf2 <- summarySE(TPDM[!is.na(TPDM$STEM.F),], measurevar="STEM.F", groupvars=c("DESTZ")) 
 
 ###TP DESTZ Dune
 #distribution
@@ -1133,15 +1206,13 @@ sd(TPD2x$STEM.F, na.rm=TRUE)
 5.18+(3*3.28) #=15.02, outliers = none
 
 #lm- subset by DESTZ=Dune
-lm2sf2  <- lm(rankSTEM.F~DESTS*(ORS/ORZ)+DESTS*ORS, data=TPD2x, na.action="na.omit")
-lm2sf3  <- update(lm2sf2,~.-DESTS:ORS)
-anova(lm2sf3, lm2sf2) #DS:OS not sig p=1, F=0
-lm2sf4  <- update(lm2sf2,~.-DESTS:(ORS/ORZ))
-anova(lm2sf4, lm2sf2) #DS:(OS/OZ) not sig p=1 f=0.4
-lm2sf5  <- lm(rankSTEM.F~DESTS+(ORS/ORZ)+ORS, data=TPD2x, na.action="na.omit")
+lm2sf2  <- lm(rankSTEM.F~DESTS+ORS+ORS/ORZ+ORS/ORZ:DESTS, data=TPD2x, na.action="na.omit")
+lm2sf4  <- update(lm2sf2,~.-ORS/ORZ:DESTS)
+anova(lm2sf4, lm2sf2) #DS:(OS/OZ) not sig p=0.4 f=1.031
+lm2sf5  <- lm(rankSTEM.F~DESTS+ORS+ORS/ORZ, data=TPD2x, na.action="na.omit")
 lm2sf6  <- update(lm2sf5,~.-DESTS)
 anova(lm2sf6, lm2sf5) #DS not sig p=0.53 f=0.402
-lm2sf7  <- update(lm2sf5,~.-(ORS/ORZ))
+lm2sf7  <- update(lm2sf5,~.-ORS/ORZ)
 anova(lm2sf7, lm2sf5) #OS/OZ not sig p=0.64 f=0.57
 lm2sf8  <- lm(rankSTEM.F~DESTS+ORS, data=TPD2x, na.action="na.omit")
 lm2sf9  <- update(lm2sf8,~.-ORS)
@@ -1163,7 +1234,7 @@ sf2sd <- tapply(TPD2x[!is.na(TPD2x$rankSTEM.F),]$rankSTEM.F, TPD2x[!is.na(TPD2x$
 sf2CV <- (sf2sd/sf2mean)*100
 
 TP2sf <- summarySE(TPD2x, measurevar="rankSTEM.F", groupvars=c("DESTS")) 
-
+TP2sf2 <- summarySE(TPD2x, measurevar="STEM.F", groupvars=c("DESTS")) 
 
 #********************
 #Response Variables: BR.F
@@ -1253,15 +1324,13 @@ qqline(lmbfR) #none are great... stepwise pattern and long tail at right
 
 #NOTE: Since random effects are not sig, use the linear model below
 #lm - subset by DESTS=MNS
-lmbf2  <- lm(rankBR.F~DESTZ*(ORS/ORZ)+DESTZ*ORS, data=TPDM, na.action="na.omit")
-lmbf3  <- update(lmbf2,~.-DESTZ:ORS)
-anova(lmbf3, lmbf2) #DZ:OS not sig p=1, F=0
-lmbf4  <- update(lmbf2,~.-DESTZ:(ORS/ORZ))
+lmbf2  <- lm(rankBR.F~DESTZ+ORS+ORS/ORZ+ORS/ORZ:DESTZ, data=TPDM, na.action="na.omit")
+lmbf4  <- update(lmbf2,~.-ORS/ORZ:DESTZ)
 anova(lmbf4, lmbf2) #DZ:(OS/OZ) not sig p=1.0 f=0.0045
-lmbf5  <- lm(rankBR.F~DESTZ+(ORS/ORZ)+ORS, data=TPDM, na.action="na.omit")
+lmbf5  <- lm(rankBR.F~DESTZ+ORS+ORS/ORZ, data=TPDM, na.action="na.omit")
 lmbf6  <- update(lmbf5,~.-DESTZ)
 anova(lmbf6, lmbf5) #DZ is sig p=0.00031 f=18.30 **
-lmbf7  <- update(lmbf5,~.-(ORS/ORZ))
+lmbf7  <- update(lmbf5,~.-ORS/ORZ)
 anova(lmbf7, lmbf5) #OS/OZ not sig p=0.58 f=0.66
 lmbf8  <- lm(rankBR.F~DESTZ+ORS, data=TPDM, na.action="na.omit")
 lmbf9  <- update(lmbf8,~.-ORS)
@@ -1281,6 +1350,7 @@ bfsd <- tapply(TPDM[!is.na(TPDM$BR.F),]$rankBR.F, TPDM[!is.na(TPDM$BR.F),]$DESTZ
 bfCV <- (bfsd/bfmean)*100
 
 TPbf <- summarySE(TPDM[!is.na(TPDM$BR.F),], measurevar="rankBR.F", groupvars=c("DESTZ"))
+TPbf2 <- summarySE(TPDM[!is.na(TPDM$BR.F),], measurevar="BR.F", groupvars=c("DESTZ"))
 ggplot(data=TPbf, aes(x=DESTZ, y=rankBR.F)) +
   geom_errorbar(aes(ymin=rankBR.F-se, ymax=rankBR.F+se), width=0.1, position=position_dodge(0.1)) +
   geom_line(position=position_dodge(0.1)) + geom_point(size=4, position=position_dodge(0.1))+
@@ -1310,21 +1380,19 @@ sd(TPD2x$BR.F, na.rm=TRUE)
 1.17+(3*0.602) #=2.98, outliers = 38
 
 #lm- subset by DESTZ=Dune
-lm2bf2  <- lm(BR.F~DESTS*(ORS/ORZ)+DESTS*ORS, data=TPD2x, na.action="na.omit")
-lm2bf3  <- update(lm2bf2,~.-DESTS:ORS)
-anova(lm2bf3, lm2bf2) #DS:OS not sig p=1, F=0
-lm2bf4  <- update(lm2bf2,~.-DESTS:(ORS/ORZ))
-anova(lm2bf4, lm2bf2) #DS:(OS/OZ) not sig p=0.67 f=0.52
-lm2bf5  <- lm(BR.F~DESTS+(ORS/ORZ)+ORS, data=TPD2x, na.action="na.omit")
+lm2bf2  <- lm(rankBR.F~DESTS+ORS+ORS/ORZ+ORS/ORZ:DESTS, data=TPD2x, na.action="na.omit")
+lm2bf4  <- update(lm2bf2,~.-ORS/ORZ:DESTS)
+anova(lm2bf4, lm2bf2) #DS:(OS/OZ) not sig p=0.52 f=0.78
+lm2bf5  <- lm(rankBR.F~DESTS+ORS+ORS/ORZ, data=TPD2x, na.action="na.omit")
 lm2bf6  <- update(lm2bf5,~.-DESTS)
-anova(lm2bf6, lm2bf5) #DS not sig p=0.31 f=1.072
-lm2bf7  <- update(lm2bf5,~.-(ORS/ORZ))
-anova(lm2bf7, lm2bf5) #OS/OZ not sig p=0.86 f=0.25
-lm2bf8  <- lm(BR.F~DESTS+ORS, data=TPD2x, na.action="na.omit")
+anova(lm2bf6, lm2bf5) #DS not sig p=0.35 f=0.91
+lm2bf7  <- update(lm2bf5,~.-ORS/ORZ)
+anova(lm2bf7, lm2bf5) #OS/OZ not sig p=0.87 f=0.23
+lm2bf8  <- lm(rankBR.F~DESTS+ORS, data=TPD2x, na.action="na.omit")
 lm2bf9  <- update(lm2bf8,~.-ORS)
-anova(lm2bf9, lm2bf8) #OS not sig p=0.88 f=0.025
+anova(lm2bf9, lm2bf8) #OS not sig p=0.54 f=0.38
 lm2bf10  <- lm(rankBR.F~1, data=TPD2x, na.action="na.omit")
-summary(lm2bf10) #intercept=1.17
+summary(lm2bf10) #intercept=15
 
 lm2bfR  <- resid(lm2bf10)
 par(mfrow = c(2, 2))
@@ -1333,9 +1401,514 @@ par(mfrow = c(1, 1))
 hist(lm2bfR) #none are great
 
 
-bf2n <- tapply(TPD2x[!is.na(TPD2x$BR.F),]$BR.F, TPD2x[!is.na(TPD2x$BR.F),]$DESTS, length)
-bf2mean <- tapply(TPD2x[!is.na(TPD2x$BR.F),]$BR.F, TPD2x[!is.na(TPD2x$BR.F),]$DESTS, mean)
-bf2sd <- tapply(TPD2x[!is.na(TPD2x$BR.F),]$BR.F, TPD2x[!is.na(TPD2x$BR.F),]$DESTS, sd)
+bf2n <- tapply(TPD2x[!is.na(TPD2x$BR.F),]$rankBR.F, TPD2x[!is.na(TPD2x$BR.F),]$DESTS, length)
+bf2mean <- tapply(TPD2x[!is.na(TPD2x$BR.F),]$rankBR.F, TPD2x[!is.na(TPD2x$BR.F),]$DESTS, mean)
+bf2sd <- tapply(TPD2x[!is.na(TPD2x$BR.F),]$rankBR.F, TPD2x[!is.na(TPD2x$BR.F),]$DESTS, sd)
 bf2CV <- (bf2sd/bf2mean)*100
 
-TP2bf <- summarySE(TPD2x, measurevar="BR.F", groupvars=c("DESTS")) 
+TP2bf <- summarySE(TPD2x, measurevar="rankBR.F", groupvars=c("DESTS")) 
+TP2bf2 <- summarySE(TPD2x, measurevar="BR.F", groupvars=c("DESTS")) 
+
+#********************
+#Response Variables: J.Date.FL
+
+#boxplot
+ggplot(data=TP, aes(x=DESTZ, y=J.Date.FL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Date Flowered") +
+  ggtitle("J.Date.FL by DESTZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, and same means.
+
+#boxplot
+ggplot(data=TP, aes(x=DESTS, y=J.Date.FL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Date Flowered") +
+  ggtitle("J.Date.FL by DESTS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, and similar means.
+
+#boxplot
+ggplot(data=TP, aes(x=ORZ, y=J.Date.FL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Date Flowered") +
+  ggtitle("J.Date.FL by ORZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but similar means.
+
+#boxplot
+ggplot(data=TP, aes(x=ORS, y=J.Date.FL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Date Flowered") +
+  ggtitle("J.Date.FL by ORS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, and similar means... more variation in D and M
+
+#TP DESTS MNS
+#distribution
+hist(TPDM[!is.na(TPDM$J.Date.FL),]$J.Date.FL) #none great... try rank
+#outliers
+mean(TPDM$J.Date.FL, na.rm=TRUE)
+sd(TPDM$J.Date.FL, na.rm=TRUE)
+228.1+(3*18.12) #=282.46, outliers = none
+
+#lmer vs lm
+#lmedfl <- lmer(J.Date.FL~DESTZ*ORZ+(1+ORZ|ORS), data=TPDM, na.action="na.omit") #convergence error
+lmedfla <- lmer(J.Date.FL~DESTZ*ORZ+(1|ORS), data=TPDM, na.action="na.omit")
+#anova(lmedfl, lmedfla) 
+lmdfl <- lm(rankJ.Date.FL~DESTZ*ORZ, data=TPDM, na.action="na.omit")
+x <- -2*logLik(lmdfl, REML=T) +2*logLik(lmedfla, REML=T)
+x
+pchisq(x, df=5, lower.tail=F)
+#logLik= 2.84e-14, p=1, random ORS not sig
+
+#check assumptions of best model
+lmdflR <- resid(lmdfl) 
+lmdflF <- fitted(lmdfl)
+plot(lmdflF, lmdflR) #okay
+abline(h=0, col=c("red"))
+hist(lmdflR) #okay... raw better
+qqnorm(lmdflR, main="Q-Q plot for residuals") 
+qqline(lmdflR) #none are great... stepwise pattern and long tail at ends... go w raw bc rank not better
+
+#NOTE: Since random effects are not sig, use the linear model below
+#lm - subset by DESTS=MNS
+lmdfl2  <- lm(J.Date.FL~DESTZ+ORS+ORS/ORZ+ORS/ORZ:DESTZ, data=TPDM, na.action="na.omit")
+lmdfl4  <- update(lmdfl2,~.-ORS/ORZ:DESTZ)
+anova(lmdfl4, lmdfl2) #DZ:(OS/OZ) not sig p=0.29 f=1.31
+lmdfl5  <- lm(J.Date.FL~DESTZ+ORS+ORS/ORZ, data=TPDM, na.action="na.omit")
+lmdfl6  <- update(lmdfl5,~.-DESTZ)
+anova(lmdfl6, lmdfl5) #DZ not sig p=0.22 f=1.60
+lmdfl7  <- update(lmdfl5,~.-ORS/ORZ)
+anova(lmdfl7, lmdfl5) #OS/OZ not sig p=0.25 f=1.46
+lmdfl8  <- lm(J.Date.FL~DESTZ+ORS, data=TPDM, na.action="na.omit")
+lmdfl9  <- update(lmdfl8,~.-ORS)
+anova(lmdfl9, lmdfl8) #OS not sig p=0.59 f=0.29
+lmdfl10  <- lm(J.Date.FL~1, data=TPDM, na.action="na.omit")
+summary(lmdfl10) #intercept=228.10
+
+lmdflR  <- resid(lmdfl10)
+par(mfrow = c(2, 2))
+plot(lmdfl10) #not a great normQQ plot with rank or raw
+par(mfrow = c(1, 1))
+hist(lmdflR) #none are great... go with raw
+
+dfln <- tapply(TPDM[!is.na(TPDM$J.Date.FL),]$J.Date.FL, TPDM[!is.na(TPDM$J.Date.FL),]$DESTZ, length)
+dflmean <- tapply(TPDM[!is.na(TPDM$J.Date.FL),]$J.Date.FL, TPDM[!is.na(TPDM$J.Date.FL),]$DESTZ, mean)
+dflsd <- tapply(TPDM[!is.na(TPDM$J.Date.FL),]$J.Date.FL, TPDM[!is.na(TPDM$J.Date.FL),]$DESTZ, sd)
+dflCV <- (dflsd/dflmean)*100
+
+TPdfl <- summarySE(TPDM[!is.na(TPDM$J.Date.FL),], measurevar="J.Date.FL", groupvars=c("DESTZ"))
+
+
+
+###TP DESTZ Dune
+#distribution
+hist(TPD2x[!is.na(TPD2x$J.Date.FL),]$J.Date.FL) #raw okay, tall column at far right
+#outliers
+mean(TPD2x$J.Date.FL, na.rm=TRUE)
+sd(TPD2x$J.Date.FL, na.rm=TRUE)
+225.91+(3*17.92) #=279.67, outliers = none
+
+#lm- subset by DESTZ=Dune
+lm2dfl2  <- lm(rankJ.Date.FL~DESTS+ORS+ORS/ORZ+ORS/ORZ:DESTS, data=TPD2x, na.action="na.omit")
+lm2dfl4  <- update(lm2dfl2,~.-ORS/ORZ:DESTS)
+anova(lm2dfl4, lm2dfl2) #DS:(OS/OZ) not sig p=0.19 f=1.70
+lm2dfl5  <- lm(rankJ.Date.FL~DESTS+ORS+ORS/ORZ, data=TPD2x, na.action="na.omit")
+lm2dfl6  <- update(lm2dfl5,~.-DESTS)
+anova(lm2dfl6, lm2dfl5) #DS not sig p=0.62 f=0.25
+lm2dfl7  <- update(lm2dfl5,~.-ORS/ORZ)
+anova(lm2dfl7, lm2dfl5) #OS/OZ not sig p=0.26 f=1.43
+lm2dfl8  <- lm(rankJ.Date.FL~DESTS+ORS, data=TPD2x, na.action="na.omit")
+lm2dfl9  <- update(lm2dfl8,~.-ORS)
+anova(lm2dfl9, lm2dfl8) #OS not sig p=0.26 f=1.33
+lm2dfl10  <- lm(rankJ.Date.FL~1, data=TPD2x, na.action="na.omit")
+summary(lm2dfl10) #intercept=16.5
+
+lm2dflR  <- resid(lm2dfl10)
+par(mfrow = c(2, 2))
+plot(lm2dfl10) #rank is best, but normQQ not great
+par(mfrow = c(1, 1))
+hist(lm2dflR) #rank is best, but tall column at right
+
+
+dfl2n <- tapply(TPD2x[!is.na(TPD2x$J.Date.FL),]$rankJ.Date.FL, TPD2x[!is.na(TPD2x$J.Date.FL),]$DESTS, length)
+dfl2mean <- tapply(TPD2x[!is.na(TPD2x$J.Date.FL),]$rankJ.Date.FL, TPD2x[!is.na(TPD2x$J.Date.FL),]$DESTS, mean)
+dfl2sd <- tapply(TPD2x[!is.na(TPD2x$J.Date.FL),]$rankJ.Date.FL, TPD2x[!is.na(TPD2x$J.Date.FL),]$DESTS, sd)
+dfl2CV <- (dfl2sd/dfl2mean)*100
+
+TP2dfl <- summarySE(TPD2x, measurevar="rankJ.Date.FL", groupvars=c("DESTS")) 
+TP2dfl2 <- summarySE(TPD2x, measurevar="J.Date.FL", groupvars=c("DESTS")) 
+
+#********************
+#Response Variables: Diff.Date.FL.F
+
+#boxplot
+ggplot(data=TP, aes(x=DESTZ, y=Diff.Date.FL.F))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Flowering Duration (days)") +
+  ggtitle("Diff.Date.FL.F by DESTZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, diff means, more var in beach
+
+#boxplot
+ggplot(data=TP, aes(x=DESTS, y=Diff.Date.FL.F))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Flowering Duration (days)") +
+  ggtitle("Diff.Date.FL.F by DESTS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, and similar means, more var in M
+
+#boxplot
+ggplot(data=TP, aes(x=ORZ, y=Diff.Date.FL.F))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Flowering Duration (days)") +
+  ggtitle("Diff.Date.FL.F by ORZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but diff means, more var in beach
+
+#boxplot
+ggplot(data=TP, aes(x=ORS, y=Diff.Date.FL.F))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Flowering Duration (days)") +
+  ggtitle("Diff.Date.FL.F by ORS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but diff means... more variation in D and M
+
+#TP DESTS MNS
+#distribution
+hist(TPDM[!is.na(TPDM$Diff.Date.FL.F),]$Diff.Date.FL.F) #none great... try rank
+#outliers
+mean(TPDM$Diff.Date.FL.F, na.rm=TRUE)
+sd(TPDM$Diff.Date.FL.F, na.rm=TRUE)
+14+(3*16.24) #=62.72, outliers = none
+
+#lmer vs lm
+lmedd <- lmer(rankDiff.Date.FL.F~DESTZ*ORZ+(1+ORZ|ORS), data=TPDM, na.action="na.omit") 
+lmedda <- lmer(rankDiff.Date.FL.F~DESTZ*ORZ+(1|ORS), data=TPDM, na.action="na.omit")
+anova(lmedd, lmedda) #ORZ not sig p=1 chisq=2, AIC=194.29, AICa=190.29
+lmdd <- lm(rankDiff.Date.FL.F~DESTZ*ORZ, data=TPDM, na.action="na.omit")
+x <- -2*logLik(lmdd, REML=T) +2*logLik(lmedda, REML=T)
+x
+pchisq(x, df=5, lower.tail=F)
+#logLik= 0, p=1, random ORS not sig
+
+#check assumptions of best model
+lmddR <- resid(lmdd) 
+lmddF <- fitted(lmdd)
+plot(lmddF, lmddR) #okay
+abline(h=0, col=c("red"))
+hist(lmdflR) #alright... tall column at right... raw and rank the same
+qqnorm(lmddR, main="Q-Q plot for residuals") 
+qqline(lmddR) #none are great... stepwise pattern and long tail at ends... rank a bit better
+
+#NOTE: Since random effects are not sig, use the linear model below
+#lm - subset by DESTS=MNS
+lmdd2  <- lm(rankDiff.Date.FL.F~DESTZ+ORS+ORS/ORZ+ORS/ORZ:DESTZ, data=TPDM, na.action="na.omit")
+lmdd4  <- update(lmdd2,~.-ORS/ORZ:DESTZ)
+anova(lmdd4, lmdd2) #DZ:(OS/OZ) not sig p=0.56 f=0.62
+lmdd5  <- lm(rankDiff.Date.FL.F~DESTZ+ORS+ORS/ORZ, data=TPDM, na.action="na.omit")
+lmdd6  <- update(lmdd5,~.-DESTZ)
+anova(lmdd6, lmdd5) #DZ is sig p=0.61 f=0.27
+lmdd7  <- update(lmdd5,~.-ORS/ORZ)
+anova(lmdd7, lmdd5) #OS/OZ not sig p=0.22 f=1.57
+lmdd8  <- lm(rankDiff.Date.FL.F~DESTZ+ORS, data=TPDM, na.action="na.omit")
+lmdd9  <- update(lmdd8,~.-ORS)
+anova(lmdd9, lmdd8) #OS not sig p=0.61 f=0.26
+lmdd10  <- lm(rankDiff.Date.FL.F~1, data=TPDM, na.action="na.omit")
+summary(lmdd10) #intercept=14
+
+lmddR  <- resid(lmdd10)
+par(mfrow = c(2, 2))
+plot(lmdd10) #not a great normQQ plot with rank or raw
+par(mfrow = c(1, 1))
+hist(lmddR) #alright... rank is better than raw, but has tall column at left
+
+ddn <- tapply(TPDM[!is.na(TPDM$Diff.Date.FL.F),]$rankDiff.Date.FL.F, TPDM[!is.na(TPDM$Diff.Date.FL.F),]$DESTZ, length)
+ddmean <- tapply(TPDM[!is.na(TPDM$Diff.Date.FL.F),]$rankDiff.Date.FL.F, TPDM[!is.na(TPDM$Diff.Date.FL.F),]$DESTZ, mean)
+ddsd <- tapply(TPDM[!is.na(TPDM$Diff.Date.FL.F),]$rankDiff.Date.FL.F, TPDM[!is.na(TPDM$Diff.Date.FL.F),]$DESTZ, sd)
+ddCV <- (ddsd/ddmean)*100
+
+TPdd <- summarySE(TPDM[!is.na(TPDM$Diff.Date.FL.F),], measurevar="rankDiff.Date.FL.F", groupvars=c("DESTZ"))
+TPdd2 <- summarySE(TPDM[!is.na(TPDM$Diff.Date.FL.F),], measurevar="Diff.Date.FL.F", groupvars=c("DESTZ"))
+
+
+
+###TP DESTZ Dune
+#distribution
+hist(TPD2x[!is.na(TPD2x$Diff.Date.FL.F),]$Diff.Date.FL.F) #try rank
+#outliers
+mean(TPD2x$Diff.Date.FL.F, na.rm=TRUE)
+sd(TPD2x$Diff.Date.FL.F, na.rm=TRUE)
+7.97+(3*10.68) #=40.01, outliers = none
+
+#lm- subset by DESTZ=Dune
+lm2dd2  <- lm(rankDiff.Date.FL.F~DESTS+ORS+ORS/ORZ+ORS/ORZ:DESTS, data=TPD2x, na.action="na.omit")
+lm2dd4  <- update(lm2dd2,~.-ORS/ORZ:DESTS)
+anova(lm2dd4, lm2dd2) #DS:(OS/OZ) not sig p=0.18 f=1.79
+lm2dd5  <- lm(rankDiff.Date.FL.F~DESTS+ORS+ORS/ORZ, data=TPD2x, na.action="na.omit")
+lm2dd6  <- update(lm2dd5,~.-DESTS)
+anova(lm2dd6, lm2dd5) #DS not sig p=0.50 f=0.47
+lm2dd7  <- update(lm2dd5,~.-ORS/ORZ)
+anova(lm2dd7, lm2dd5) #OS/OZ not sig p=0.505 f=0.801
+lm2dd8  <- lm(rankDiff.Date.FL.F~DESTS+ORS, data=TPD2x, na.action="na.omit")
+lm2dd9  <- update(lm2dd8,~.-ORS)
+anova(lm2dd9, lm2dd8) #OS not sig p=0.98 f=0.0009
+lm2dd10  <- lm(rankDiff.Date.FL.F~1, data=TPD2x, na.action="na.omit")
+summary(lm2dd10) #intercept=15
+
+lm2ddR  <- resid(lm2dd10)
+par(mfrow = c(2, 2))
+plot(lm2dd10) #rank is best, but normQQ not great
+par(mfrow = c(1, 1))
+hist(lm2ddR) #rank is best, but tall column at left
+
+
+dd2n <- tapply(TPD2x[!is.na(TPD2x$Diff.Date.FL.F),]$rankDiff.Date.FL.F, TPD2x[!is.na(TPD2x$Diff.Date.FL.F),]$DESTS, length)
+dd2mean <- tapply(TPD2x[!is.na(TPD2x$Diff.Date.FL.F),]$rankDiff.Date.FL.F, TPD2x[!is.na(TPD2x$Diff.Date.FL.F),]$DESTS, mean)
+dd2sd <- tapply(TPD2x[!is.na(TPD2x$Diff.Date.FL.F),]$rankDiff.Date.FL.F, TPD2x[!is.na(TPD2x$Diff.Date.FL.F),]$DESTS, sd)
+dd2CV <- (dd2sd/dd2mean)*100
+
+TP2dd <- summarySE(TPD2x, measurevar="rankDiff.Date.FL.F", groupvars=c("DESTS")) 
+TP2dd2 <- summarySE(TPD2x, measurevar="Diff.Date.FL.F", groupvars=c("DESTS")) 
+
+
+#********************
+#Response Variables: F.NFL
+
+#boxplot
+ggplot(data=TP, aes(x=DESTZ, y=F.NFL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Lifetime Fitness") +
+  ggtitle("F.NFL by DESTZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: no overlap, diff means, more var in beach
+
+#boxplot
+ggplot(data=TP, aes(x=DESTS, y=F.NFL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Lifetime Fitness") +
+  ggtitle("F.NFL by DESTS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: no overlap, diff means, more var in M
+
+#boxplot
+ggplot(data=TP, aes(x=ORZ, y=F.NFL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Lifetime Fitness") +
+  ggtitle("F.NFL by ORZ")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but diff means, more var in beach
+
+#boxplot
+ggplot(data=TP, aes(x=ORS, y=F.NFL))+
+  geom_boxplot(width=0.8, position="dodge")+ 
+  ylab("Lifetime Fitness") +
+  ggtitle("F.NFL by ORS")+
+  theme_bw() + theme(legend.justification=c(1,0), legend.position="top", 
+                     legend.text=element_text(face="bold", size=18), 
+                     legend.title=element_text(face="bold", size=18))+
+  theme(axis.title.x = element_text(vjust=0.3, face="bold", size=20), 
+        axis.text.x  = element_text(vjust=0.3, hjust=0.5, size=18, face="bold"))+
+  theme(axis.title.y = element_text(vjust=1, face="bold", size=20),
+        axis.text.y  = element_text(size=18, face="bold"))
+#NOTE: overlap, but diff means... more variation in D and M
+
+#TP DESTS MNS
+#distribution
+hist(TPDM[!is.na(TPDM$F.NFL),]$sqrtF.NFL) #log is better than raw.
+#outliers
+mean(TPDM$F.NFL, na.rm=TRUE)
+sd(TPDM$F.NFL, na.rm=TRUE)
+11.18+(3*13.44) #=51.5, outliers = none
+
+#lmer vs lm
+lmefr <- lmer(logF.NFL~DESTZ*ORZ+(1+ORZ|ORS), data=TPDM, na.action="na.omit") 
+lmefra <- lmer(logF.NFL~DESTZ*ORZ+(1|ORS), data=TPDM, na.action="na.omit")
+anova(lmefr, lmefra) #convergence code 3
+lmfr <- lm(logF.NFL~DESTZ*ORZ, data=TPDM, na.action="na.omit")
+x <- -2*logLik(lmfr, REML=T) +2*logLik(lmefra, REML=T)
+x
+pchisq(x, df=5, lower.tail=F)
+#logLik= 0, p=1, random ORS not sig
+
+#check assumptions of best model
+lmfrR <- resid(lmfr) 
+lmfrF <- fitted(lmfr)
+plot(lmfrF, lmfrR) #log okay
+abline(h=0, col=c("red"))
+hist(lmfrR) #log okay
+qqnorm(lmfrR, main="Q-Q plot for residuals") 
+qqline(lmfrR) #none are the best, but log acceptable... tails at each end
+
+#NOTE: Since random effects are not sig, use the linear model below
+#lm - subset by DESTS=MNS
+lmfr2  <- lm(logF.NFL~DESTZ+ORS+ORS/ORZ+ORS/ORZ:DESTZ, data=TPDM, na.action="na.omit")
+lmfr4  <- update(lmfr2,~.-ORS/ORZ:DESTZ)
+anova(lmfr4, lmfr2) #DZ:(OS/OZ) not sig p=0.96 f=0.041
+lmfr5  <- lm(logF.NFL~DESTZ+ORS+ORS/ORZ, data=TPDM, na.action="na.omit")
+lmfr6  <- update(lmfr5,~.-DESTZ)
+anova(lmfr6, lmfr5) #DZ is sig p=0.00046 f=16.92 *
+lmfr7  <- update(lmfr5,~.-ORS/ORZ)
+anova(lmfr7, lmfr5) #OS/OZ not sig p=0.27 f=1.39
+lmfr8  <- lm(logF.NFL~DESTZ+ORS, data=TPDM, na.action="na.omit")
+lmfr9  <- update(lmfr8,~.-ORS)
+anova(lmfr9, lmfr8) #OS not sig p=0.25 f=1.38
+lmfr10  <- lm(logF.NFL~DESTZ, data=TPDM, na.action="na.omit")
+summary(lmfr10) #intercept=1.11, destz= -0.58, R^2=0.40, F=18.14[1,25], p=0.00025
+
+lmfrR  <- resid(lmfr10)
+par(mfrow = c(2, 2))
+plot(lmfr10) #log okay, normQQ not great but okay
+par(mfrow = c(1, 1))
+hist(lmfrR) #log okay, skew left
+
+frn <- tapply(TPDM[!is.na(TPDM$F.NFL),]$logF.NFL, TPDM[!is.na(TPDM$F.NFL),]$DESTZ, length)
+frmean <- tapply(TPDM[!is.na(TPDM$F.NFL),]$logF.NFL, TPDM[!is.na(TPDM$F.NFL),]$DESTZ, mean)
+frsd <- tapply(TPDM[!is.na(TPDM$F.NFL),]$logF.NFL, TPDM[!is.na(TPDM$F.NFL),]$DESTZ, sd)
+frCV <- (frsd/frmean)*100
+
+TPfr <- summarySE(TPDM[!is.na(TPDM$F.NFL),], measurevar="logF.NFL", groupvars=c("DESTZ"))
+TPfr2 <- summarySE(TPDM[!is.na(TPDM$F.NFL),], measurevar="F.NFL", groupvars=c("DESTZ"))
+
+
+
+###TP DESTZ Dune
+#distribution
+hist(TPD2x[!is.na(TPD2x$F.NFL),]$sqrtF.NFL) #none great
+#outliers
+mean(TPD2x$F.NFL, na.rm=TRUE)
+sd(TPD2x$F.NFL, na.rm=TRUE)
+2.79+(3*6.705) #=22.905, outliers = 38
+
+#lm- subset by DESTZ=Dune
+lm2fr2  <- lm(sqrtF.NFL~DESTS+ORS+ORS/ORZ+ORS/ORZ:DESTS, data=TPD2x, na.action="na.omit")
+lm2fr4  <- update(lm2fr2,~.-ORS/ORZ:DESTS)
+anova(lm2fr4, lm2fr2) #DS:(OS/OZ) not sig p=0.67 f=0.52
+lm2fr5  <- lm(sqrtF.NFL~DESTS+ORS+ORS/ORZ, data=TPD2x, na.action="na.omit")
+lm2fr6  <- update(lm2fr5,~.-DESTS)
+anova(lm2fr6, lm2fr5) #DS not sig p=0.15 f=2.25
+lm2fr7  <- update(lm2fr5,~.-ORS/ORZ)
+anova(lm2fr7, lm2fr5) #OS/OZ not sig p=0.89 f=0.21
+lm2fr8  <- lm(sqrtF.NFL~DESTS+ORS, data=TPD2x, na.action="na.omit")
+lm2fr9  <- update(lm2fr8,~.-ORS)
+anova(lm2fr9, lm2fr8) #OS not sig p=0.50 f=0.47
+lm2fr10  <- lm(sqrtF.NFL~1, data=TPD2x, na.action="na.omit")
+summary(lm2fr10) #intercept=1.56
+
+lm2frR  <- resid(lm2fr10)
+par(mfrow = c(2, 2))
+plot(lm2fr10) #sqrt okay.. normQQ not great
+par(mfrow = c(1, 1))
+hist(lm2frR) #none are great... sqrt is best.. skew left
+
+
+fr2n <- tapply(TPD2x[!is.na(TPD2x$F.NFL),]$sqrtF.NFL, TPD2x[!is.na(TPD2x$F.NFL),]$DESTS, length)
+fr2mean <- tapply(TPD2x[!is.na(TPD2x$F.NFL),]$sqrtF.NFL, TPD2x[!is.na(TPD2x$F.NFL),]$DESTS, mean)
+fr2sd <- tapply(TPD2x[!is.na(TPD2x$F.NFL),]$sqrtF.NFL, TPD2x[!is.na(TPD2x$F.NFL),]$DESTS, sd)
+fr2CV <- (fr2sd/fr2mean)*100
+
+TP2fr <- summarySE(TPD2x, measurevar="sqrtF.NFL", groupvars=c("DESTS")) 
+TP2fr2 <- summarySE(TPD2x, measurevar="F.NFL", groupvars=c("DESTS")) 
+
+
+#raw data
+write.table(TPgr, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE)
+write.table(TPslf2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)   
+write.table(TPsf2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TPbf2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TPdfl, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TPdd2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TPfr2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+
+write.table(TP2gr, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2slf, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)   
+write.table(TP2sf2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2bf2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2dfl2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2dd2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2fr2, file = "TP2013 raw variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+
+#transformed data
+write.table(TPgr, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE)
+write.table(TPslf, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)   
+write.table(TPsf, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TPbf, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TPdfl, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TPdd, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TPfr, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+
+write.table(TP2gr, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2slf, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)   
+write.table(TP2sf, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2bf, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2dfl, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2dd, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+write.table(TP2fr, file = "TP2013 tform variable summary.csv", sep = ",", col.names = TRUE, row.names = TRUE, append = TRUE)
+
